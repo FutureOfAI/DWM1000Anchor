@@ -1,6 +1,6 @@
 # DW1000 Python Library for Raspberry Pi
 
-This module provides functions allowing the use of the DW1000 chip with a Raspberry Pi using Python scripts. It is an adaptation in Python language of the [arduino-dw1000] library. 
+This module provides functions allowing the use of the DW1000 chip with a Raspberry Pi using Python scripts, as presented in [this tutorial]. It is an adaptation in Python language of the [arduino-dw1000] library. 
 This chip embeds Ultra Wide Band (UWB) technology which can be used for message transmissions and more commonly, ranging functionality.
 
 The following external python modules/libraries are necessary for its proper use:
@@ -12,3 +12,4 @@ The following external python modules/libraries are necessary for its proper use
 [monotonic]: <https://github.com/atdt/monotonic>
 [spidev]: <https://github.com/doceme/py-spidev>
 [RPi.GPIO]: <https://sourceforge.net/p/raspberry-gpio-python/wiki/install/>
+[this tutorial]: <https://thingtype.com/blog/using-a-dwm1000-module-with-a-raspberry-pi-and-python/>
