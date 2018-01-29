@@ -65,7 +65,7 @@ def resetInactive():
     This function restarts the default polling operation when the device is deemed inactive.
     """    
     global expectedMsgId
-    # print("reset inactive")    
+    print("reset inactive")    
     expectedMsgId = C.POLL
     receiver()
     noteActivity()
