@@ -166,6 +166,8 @@ DIS_DRXB_BIT = 12
 HIRQ_POL_BIT = 9
 RXM110K_BIT = 22
 RXAUTR_BIT = 29
+FFEN_BIT = 0
+DIS_STXP_BIT = 18
 
 # System control register bits, see 7.2.15 of User Manual
 SFCST_BIT = 0
