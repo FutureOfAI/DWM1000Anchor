@@ -151,11 +151,12 @@ def loop():
         new_trans_flag = 0
         transmitAnchorMsg(anchors)
         noteActivity()
-    # if (sentAck == False and receivedAck == False):
-    #     if ((millis() - lastActivity) > C.RESET_PERIOD):
-    #         # initial receiver
-    #         resetInactive()
-    #     return
+    if (sentAck == False and receivedAck == False):
+        if ((millis() - lastActivity) > C.RESET_PERIOD):
+            # initial receiver
+            # resetInactive()
+            
+        return
 
     if sentAck:
         sentAck = False
