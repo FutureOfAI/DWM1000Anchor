@@ -82,7 +82,7 @@ def transmitAnchorMsg(anchor):
     while (millis() - lastMsg < MSG_RANGE_FREQ):
         pass
     DW1000.newTransmit()
-    data[0] = 5
+    data[0] = anchor
     DW1000.setData(data, LEN_DATA)
     DW1000.startTransmit()
     lastMsg = millis()
@@ -160,20 +160,20 @@ def loop():
     if sentAck:
         sentAck = False
         msgId = data[0]
-        if msgId == 5:
-            print ("Msg Sented")
+        if msgId == 25:
+            print ("An25 Msg Sented")
     #     if msgId == C.POLL_ACK:
     #         timePollAckSentTS = DW1000.getTransmitTimestamp()
     #         noteActivity()
 
-    # if receivedAck:
-    #     print ("Rcved")
-    #     receivedAck = False
-        # data = DW1000.getData(LEN_DATA)
-        # msgId = data[0]
+    if receivedAck:
+        receivedAck = False
+        data = DW1000.getData(LEN_DATA)
+        msgId = data[0]
         # if msgId != expectedMsgId:
         #     protocolFailed = True
-        # if msgId == C.POLL:
+        if msgId == C.POLL:
+            print ("POLL Rcved")
         #     protocolFailed = False
         #     timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     expectedMsgId = C.RANGE
