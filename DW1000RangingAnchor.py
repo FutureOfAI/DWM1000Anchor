@@ -193,6 +193,7 @@ def loop():
                 transmitRangeAcknowledge()
                 distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
                 print("Distance: %.2f m" %(distance))
+                new_trans_flag = 1
 
         #     else:
         #         # transmit RANGE_FAILED
