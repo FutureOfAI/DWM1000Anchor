@@ -7,6 +7,7 @@ It requires the following modules: DW1000, DW1000Constants and monotonic.
 import DW1000
 import monotonic
 import DW1000Constants as C
+import RPi.GPIO as GPIO
 
 LEN_DATA = 16
 data = [0] * LEN_DATA
@@ -21,7 +22,6 @@ timePollAckReceivedTS = 0
 REPLY_DELAY_TIME_US = 7000
 # The polling range frequency defines the time interval between every distance poll in milliseconds. Feel free to change its value. 
 POLL_RANGE_FREQ = 1000 # the distance between the tag and the anchor will be estimated every second.
-
 
 
 def millis():
@@ -148,8 +148,11 @@ def loop():
 
 
 try:
+    PIN_RST = 17
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PIN_RST, GPIO.IN)
     PIN_IRQ = 19
-    PIN_SS = 16
+    PIN_SS = 27
     DW1000.begin(PIN_IRQ)
     DW1000.setup(PIN_SS)
     print("DW1000 initialized")
