@@ -9,6 +9,7 @@ import monotonic
 import DW1000Constants as C
 import RPi.GPIO as GPIO
 
+anchors = 25
 lastActivity = 0
 lastMsg = 0
 expectedMsgId = C.POLL
@@ -72,16 +73,18 @@ def resetInactive():
     receiver()
     noteActivity()
 
-def transmitAnchorMsg():
+def transmitAnchorMsg(anchor):
     """
     This function sends the read anchor message to known anchors
     """        
     global data, lastMsg
-    while (millis() - lastPoll < MSG_RANGE_FREQ):
+    while (millis() - lastMsg < MSG_RANGE_FREQ):
         pass
     DW1000.newTransmit()
-    data[0] = 3
-    lastMsg
+    data[0] = 5
+    DW1000.setData(data, LEN_DATA)
+    DW1000.startTransmit()
+    lastMsg = millis()
 
 def transmitPollAck():
     """
@@ -142,22 +145,27 @@ def computeRangeAsymmetric():
 def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS
 
+    if new_trans_flag:
+        new_trans_flag = 0
+        transmitAnchorMsg(anchors)
+        noteActivity()
     # if (sentAck == False and receivedAck == False):
     #     if ((millis() - lastActivity) > C.RESET_PERIOD):
     #         # initial receiver
     #         resetInactive()
     #     return
 
-    # if sentAck:
-    #     sentAck = False
+    if sentAck:
+        sentAck = False
+        print ("Sented")
     #     msgId = data[0]
     #     if msgId == C.POLL_ACK:
     #         timePollAckSentTS = DW1000.getTransmitTimestamp()
     #         noteActivity()
 
-    if receivedAck:
-        print ("Rcved")
-        # receivedAck = False
+    # if receivedAck:
+    #     print ("Rcved")
+    #     receivedAck = False
         # data = DW1000.getData(LEN_DATA)
         # msgId = data[0]
         # if msgId != expectedMsgId:
@@ -207,6 +215,7 @@ try:
     DW1000.setAntennaDelay(C.ANTENNA_DELAY_RASPI)
 
     receiver()
+    # transmitPoll()
     noteActivity()
     while 1:
         loop()
