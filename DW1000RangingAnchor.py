@@ -189,8 +189,8 @@ def loop():
                 timePollAckReceivedTS = DW1000.getTimeStamp(data, 6)
                 timeRangeSentTS = DW1000.getTimeStamp(data, 11)
                 computeRangeAsymmetric()
-        #         # Transmit RANGE_REPORT
-        #         transmitRangeAcknowledge()
+                # Transmit RANGE_REPORT
+                transmitRangeAcknowledge()
                 distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
                 print("Distance: %.2f m" %(distance))
 
