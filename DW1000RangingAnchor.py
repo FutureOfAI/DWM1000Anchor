@@ -9,6 +9,7 @@ import monotonic
 import DW1000Constants as C
 import RPi.GPIO as GPIO
 
+new_trans_flag = 1
 anchors = 25
 lastActivity = 0
 lastMsg = 0
@@ -143,7 +144,8 @@ def computeRangeAsymmetric():
 
 
 def loop():
-    global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS
+    global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS, \
+        anchors, new_trans_flag
 
     if new_trans_flag:
         new_trans_flag = 0
