@@ -10,6 +10,7 @@ import DW1000Constants as C
 import RPi.GPIO as GPIO
 
 lastActivity = 0
+lastMsg = 0
 expectedMsgId = C.POLL
 protocolFailed = False
 sentAck = False
@@ -24,7 +25,8 @@ timePollSentTS = 0
 timeRangeSentTS = 0
 timeComputedRangeTS = 0
 REPLY_DELAY_TIME_US = 7000 
-
+# The polling range frequency defines the time interval between every distance poll in milliseconds. Feel free to change its value. 
+MSG_RANGE_FREQ = 1000 # the distance between the tag and the anchor will be estimated every second.
 
 def millis():
     """
@@ -70,6 +72,16 @@ def resetInactive():
     receiver()
     noteActivity()
 
+def transmitAnchorMsg():
+    """
+    This function sends the read anchor message to known anchors
+    """        
+    global data, lastMsg
+    while (millis() - lastPoll < MSG_RANGE_FREQ):
+        pass
+    DW1000.newTransmit()
+    data[0] = 3
+    lastMsg
 
 def transmitPollAck():
     """
@@ -131,6 +143,7 @@ def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS
     if (sentAck == False and receivedAck == False):
         if ((millis() - lastActivity) > C.RESET_PERIOD):
+            # initial receiver
             resetInactive()
         return
 
@@ -151,6 +164,7 @@ def loop():
             protocolFailed = False
             timePollReceivedTS = DW1000.getReceiveTimestamp()
             expectedMsgId = C.RANGE
+            # transmit POLL_ACK
             transmitPollAck()
             noteActivity()
         elif msgId == C.RANGE:
@@ -161,11 +175,13 @@ def loop():
                 timePollAckReceivedTS = DW1000.getTimeStamp(data, 6)
                 timeRangeSentTS = DW1000.getTimeStamp(data, 11)
                 computeRangeAsymmetric()
+                # Transmit RANGE_REPORT
                 transmitRangeAcknowledge()
                 distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
                 print("Distance: %.2f m" %(distance))
 
             else:
+                # transmit RANGE_FAILED
                 transmitRangeFailed()
 
             noteActivity()
