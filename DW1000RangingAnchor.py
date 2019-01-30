@@ -159,8 +159,9 @@ def loop():
 
     if sentAck:
         sentAck = False
-        print ("Sented")
-    #     msgId = data[0]
+        msgId = data[0]
+        if msgId == 5:
+            print ("Msg Sented")
     #     if msgId == C.POLL_ACK:
     #         timePollAckSentTS = DW1000.getTransmitTimestamp()
     #         noteActivity()
