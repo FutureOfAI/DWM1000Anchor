@@ -174,24 +174,25 @@ def loop():
         #     protocolFailed = True
         if msgId == C.POLL:
             print ("POLL Rcved")
-        #     protocolFailed = False
+            protocolFailed = False
             timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     expectedMsgId = C.RANGE
             # transmit POLL_ACK
             transmitPollAck()
             noteActivity()
-        # elif msgId == C.RANGE:
-        #     timeRangeReceivedTS = DW1000.getReceiveTimestamp()
+        elif msgId == C.RANGE:
+            timeRangeReceivedTS = DW1000.getReceiveTimestamp()
+            print ("RANGE Rcved")
         #     expectedMsgId = C.POLL
-        #     if protocolFailed == False:
-        #         timePollSentTS = DW1000.getTimeStamp(data, 1)
-        #         timePollAckReceivedTS = DW1000.getTimeStamp(data, 6)
-        #         timeRangeSentTS = DW1000.getTimeStamp(data, 11)
-        #         computeRangeAsymmetric()
+            if protocolFailed == False:
+                timePollSentTS = DW1000.getTimeStamp(data, 1)
+                timePollAckReceivedTS = DW1000.getTimeStamp(data, 6)
+                timeRangeSentTS = DW1000.getTimeStamp(data, 11)
+                computeRangeAsymmetric()
         #         # Transmit RANGE_REPORT
         #         transmitRangeAcknowledge()
         #         distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
-        #         print("Distance: %.2f m" %(distance))
+                print("Distance: %.2f m" %(distance))
 
         #     else:
         #         # transmit RANGE_FAILED
