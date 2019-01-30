@@ -175,11 +175,11 @@ def loop():
         if msgId == C.POLL:
             print ("POLL Rcved")
         #     protocolFailed = False
-        #     timePollReceivedTS = DW1000.getReceiveTimestamp()
+            timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     expectedMsgId = C.RANGE
-        #     # transmit POLL_ACK
-        #     transmitPollAck()
-        #     noteActivity()
+            # transmit POLL_ACK
+            transmitPollAck()
+            noteActivity()
         # elif msgId == C.RANGE:
         #     timeRangeReceivedTS = DW1000.getReceiveTimestamp()
         #     expectedMsgId = C.POLL
