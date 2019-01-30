@@ -191,7 +191,7 @@ def loop():
                 computeRangeAsymmetric()
         #         # Transmit RANGE_REPORT
         #         transmitRangeAcknowledge()
-        #         distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
+                distance = (timeComputedRangeTS % C.TIME_OVERFLOW) * C.DISTANCE_OF_RADIO
                 print("Distance: %.2f m" %(distance))
 
         #     else:
