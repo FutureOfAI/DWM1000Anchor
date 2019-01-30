@@ -141,11 +141,12 @@ def computeRangeAsymmetric():
 
 def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS
-    if (sentAck == False and receivedAck == False):
-        if ((millis() - lastActivity) > C.RESET_PERIOD):
-            # initial receiver
-            resetInactive()
-        return
+
+    # if (sentAck == False and receivedAck == False):
+    #     if ((millis() - lastActivity) > C.RESET_PERIOD):
+    #         # initial receiver
+    #         resetInactive()
+    #     return
 
     # if sentAck:
     #     sentAck = False
