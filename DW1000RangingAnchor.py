@@ -155,7 +155,7 @@ def loop():
         if ((millis() - lastActivity) > C.RESET_PERIOD):
             # initial receiver
             # resetInactive()
-            
+            new_trans_flag = 1
         return
 
     if sentAck:
