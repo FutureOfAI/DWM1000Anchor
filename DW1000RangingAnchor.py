@@ -69,7 +69,7 @@ def resetInactive():
     This function restarts the default polling operation when the device is deemed inactive.
     """    
     global expectedMsgId
-    print("reset inactive")    
+    print("reset inactive")
     expectedMsgId = C.POLL
     receiver()
     noteActivity()
@@ -83,6 +83,7 @@ def transmitAnchorMsg(anchor):
         pass
     DW1000.newTransmit()
     data[0] = anchor
+    DW1000.setDelay(REPLY_DELAY_TIME_US, C.MICROSECONDS)
     DW1000.setData(data, LEN_DATA)
     DW1000.startTransmit()
     lastMsg = millis()
