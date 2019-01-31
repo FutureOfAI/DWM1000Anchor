@@ -165,7 +165,7 @@ def loop():
             print ("An25 Msg Sented")
         if msgId == C.POLL_ACK:
             print ("POLL ACK Sented")
-            timePollAckSentTS = DW1000.getTransmitTimestamp()
+            # timePollAckSentTS = DW1000.getTransmitTimestamp()
             noteActivity()
 
     if receivedAck:
@@ -215,7 +215,6 @@ try:
     DW1000.setAntennaDelay(C.ANTENNA_DELAY_RASPI)
 
     receiver()
-    transmitAnchorMsg(anchors)
     noteActivity()
     while 1:
         loop()
