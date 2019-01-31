@@ -214,6 +214,7 @@ try:
     DW1000.setAntennaDelay(C.ANTENNA_DELAY_RASPI)
 
     receiver()
+    transmitAnchorMsg(anchors)
     noteActivity()
     while 1:
         loop()
