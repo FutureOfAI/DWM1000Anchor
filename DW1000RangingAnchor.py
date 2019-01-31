@@ -210,7 +210,7 @@ try:
     PIN_IRQ = 19
     PIN_SS = 27
     GPIO.setmode(GPIO.BCM)
-    # GPIO.setup(PIN_RST, GPIO.IN)
+    GPIO.setup(PIN_RST, GPIO.IN)
     DW1000.begin(PIN_IRQ)
     DW1000.setup(PIN_SS)
     print("DW1000 initialized")
