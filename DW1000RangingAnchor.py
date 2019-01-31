@@ -153,8 +153,6 @@ def loop():
         noteActivity()
     if (sentAck == False and receivedAck == False):
         if ((millis() - lastActivity) > C.RESET_PERIOD):
-            # initial receiver
-            # resetInactive()
             new_trans_flag = 1
         return
 
@@ -172,20 +170,16 @@ def loop():
         receivedAck = False
         data = DW1000.getData(LEN_DATA)
         msgId = data[0]
-        # if msgId != expectedMsgId:
-        #     protocolFailed = True
         if msgId == C.POLL:
             print ("POLL Rcved")
             protocolFailed = False
             timePollReceivedTS = DW1000.getReceiveTimestamp()
-        #     expectedMsgId = C.RANGE
             # transmit POLL_ACK
             transmitPollAck()
             noteActivity()
         elif msgId == C.RANGE:
             timeRangeReceivedTS = DW1000.getReceiveTimestamp()
             print ("RANGE Rcved")
-        #     expectedMsgId = C.POLL
             if protocolFailed == False:
                 timePollSentTS = DW1000.getTimeStamp(data, 1)
                 timePollAckReceivedTS = DW1000.getTimeStamp(data, 6)
@@ -198,10 +192,7 @@ def loop():
                 new_trans_flag = 1
             else:
                 new_trans_flag = 1
-        #         # transmit RANGE_FAILED
-        #         transmitRangeFailed()
-
-        #     noteActivity()
+            noteActivity()
 
 
 
