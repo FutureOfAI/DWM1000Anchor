@@ -6,6 +6,7 @@ It requires the following modules: DW1000, DW1000Constants and monotonic.
 
 import DW1000
 import monotonic
+import time
 import DW1000Constants as C
 import RPi.GPIO as GPIO
 
@@ -218,6 +219,7 @@ try:
     noteActivity()
     while 1:
         loop()
+        time.sleep(0.01)
 
 except KeyboardInterrupt:
     DW1000.close()
