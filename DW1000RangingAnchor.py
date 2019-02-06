@@ -148,6 +148,7 @@ def computeRangeAsymmetric():
 def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS, \
         anchors, new_trans_flag
+
     if new_trans_flag:
         new_trans_flag = 0
         transmitAnchorMsg(anchors)
@@ -164,10 +165,9 @@ def loop():
         msgId = data[0]
         if msgId == 25:
             print ("An25 Msg Sented")
-    #     if msgId == C.POLL_ACK:
-    #         print ("POLL ACK Sented")
+        if msgId == C.POLL_ACK:
+            print ("POLL ACK Sented")
     #         # timePollAckSentTS = DW1000.getTransmitTimestamp()
-    #         noteActivity()
 
     if receivedAck:
         receivedAck = False
@@ -176,11 +176,11 @@ def loop():
         if msgId == C.POLL:
             print ("POLL Rcved")
             new_trans_flag  = 1
-        #     protocolFailed = False
+            # protocolFailed = False
         #     timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     # transmit POLL_ACK
-        #     transmitPollAck()
-        #     noteActivity()
+            transmitPollAck()
+            noteActivity()
         # elif msgId == C.RANGE:
         #     timeRangeReceivedTS = DW1000.getReceiveTimestamp()
         #     print ("RANGE Rcved")
