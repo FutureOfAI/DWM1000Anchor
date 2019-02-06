@@ -148,32 +148,32 @@ def computeRangeAsymmetric():
 def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS, \
         anchors, new_trans_flag
-    if (sentAck == False and receivedAck == False):
-        if ((millis() - lastActivity) > C.RESET_PERIOD):
-            new_trans_flag = 1
-        return
+    # if (sentAck == False and receivedAck == False):
+    #     if ((millis() - lastActivity) > C.RESET_PERIOD):
+    #         new_trans_flag = 1
+    #     return
 
     if new_trans_flag:
         new_trans_flag = 0
         transmitAnchorMsg(anchors)
-        noteActivity()
+        # noteActivity()
 
     if sentAck:
         sentAck = False
         msgId = data[0]
         if msgId == 25:
             print ("An25 Msg Sented")
-        if msgId == C.POLL_ACK:
-            print ("POLL ACK Sented")
-            # timePollAckSentTS = DW1000.getTransmitTimestamp()
-            noteActivity()
+    #     if msgId == C.POLL_ACK:
+    #         print ("POLL ACK Sented")
+    #         # timePollAckSentTS = DW1000.getTransmitTimestamp()
+    #         noteActivity()
 
-    if receivedAck:
-        receivedAck = False
-        data = DW1000.getData(LEN_DATA)
-        msgId = data[0]
-        if msgId == C.POLL:
-            print ("POLL Rcved")
+    # if receivedAck:
+    #     receivedAck = False
+    #     data = DW1000.getData(LEN_DATA)
+    #     msgId = data[0]
+    #     if msgId == C.POLL:
+            # print ("POLL Rcved")
         #     protocolFailed = False
         #     timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     # transmit POLL_ACK
