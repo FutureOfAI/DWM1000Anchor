@@ -174,7 +174,7 @@ def loop():
         msgId = data[0]
         if msgId == C.POLL:
             print ("POLL Rcved")
-            # new_trans_flag  = 1
+            new_trans_flag  = 1
         #     protocolFailed = False
         #     timePollReceivedTS = DW1000.getReceiveTimestamp()
         #     # transmit POLL_ACK
