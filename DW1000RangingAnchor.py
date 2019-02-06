@@ -148,16 +148,16 @@ def computeRangeAsymmetric():
 def loop():
     global sentAck, receivedAck, timePollAckSentTS, timePollReceivedTS, timePollSentTS, timePollAckReceivedTS, timeRangeReceivedTS, protocolFailed, data, expectedMsgId, timeRangeSentTS, \
         anchors, new_trans_flag
+    if new_trans_flag:
+        new_trans_flag = 0
+        transmitAnchorMsg(anchors)
+        noteActivity()
+
     # long time no ack resent
     if (sentAck == False and receivedAck == False):
         if ((millis() - lastActivity) > C.RESET_PERIOD):
             new_trans_flag = 1
         return
-
-    if new_trans_flag:
-        new_trans_flag = 0
-        transmitAnchorMsg(anchors)
-        noteActivity()
 
     if sentAck:
         sentAck = False
