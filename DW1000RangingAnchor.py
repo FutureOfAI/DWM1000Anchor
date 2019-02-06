@@ -96,7 +96,7 @@ def transmitPollAck():
     global data
     DW1000.newTransmit()
     data[0] = C.POLL_ACK
-    DW1000.setDelay(REPLY_DELAY_TIME_US, C.MICROSECONDS)
+    # DW1000.setDelay(REPLY_DELAY_TIME_US, C.MICROSECONDS)
     DW1000.setData(data, LEN_DATA)
     DW1000.startTransmit()
 
