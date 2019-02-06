@@ -219,7 +219,7 @@ try:
     noteActivity()
     while 1:
         loop()
-        time.sleep(0.01)
+        time.sleep(0.001)
 
 except KeyboardInterrupt:
     DW1000.close()
