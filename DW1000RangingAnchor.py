@@ -156,6 +156,7 @@ def loop():
     if new_trans_flag:
         new_trans_flag = 0
         transmitAnchorMsg(anchors)
+        print "trans test"
         # noteActivity()
 
     if sentAck:
