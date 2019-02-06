@@ -154,17 +154,17 @@ def loop():
     #     return
 
     if new_trans_flag:
-        new_trans_flag = 0
-        transmitAnchorMsg(anchors)
+        # new_trans_flag = 0
+        # transmitAnchorMsg(anchors)
         print "trans test"
         # noteActivity()
 
-    if sentAck:
-        sentAck = False
-        msgId = data[0]
-        if msgId == 25:
-            print ("An25 Msg Sented")
-            new_trans_flag = 1
+    # if sentAck:
+    #     sentAck = False
+    #     msgId = data[0]
+    #     if msgId == 25:
+    #         print ("An25 Msg Sented")
+    #         new_trans_flag = 1
     #     if msgId == C.POLL_ACK:
     #         print ("POLL ACK Sented")
     #         # timePollAckSentTS = DW1000.getTransmitTimestamp()
